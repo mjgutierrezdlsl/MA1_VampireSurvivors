@@ -10,11 +10,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Image _healthBarFill;
     float _currentHealth = 0;
     Rigidbody2D _rb2D;
+    SpriteRenderer _spriteRenderer;
     Vector2 _moveDirection;
 
     private void Awake()
     {
         _rb2D = GetComponent<Rigidbody2D>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
     private void Start()
     {
@@ -24,6 +26,15 @@ public class PlayerController : MonoBehaviour
     {
         _moveDirection = new(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         _moveDirection.Normalize();
+
+        if (_moveDirection.x < 0)
+        {
+            _spriteRenderer.flipX = true;
+        }
+        else if (_moveDirection.x > 0)
+        {
+            _spriteRenderer.flipX = false;
+        }
 
         _healthBarFill.fillAmount = _currentHealth / _maxHealth;
     }
