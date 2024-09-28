@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    [SerializeField] Transform _player;
     [SerializeField] float _moveSpeed = 5f;
     [SerializeField] float _maxHealth = 5f;
+    Transform _player;
     float _currentHealth;
     SpriteRenderer _spriteRenderer;
     Rigidbody2D _rb2D;
@@ -16,12 +16,17 @@ public class EnemyController : MonoBehaviour
         _rb2D = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
+    public void Initialize(Transform player)
+    {
+        _player = player;
+    }
     private void Start()
     {
         _currentHealth = _maxHealth;
     }
     private void FixedUpdate()
     {
+        if (!_player) { return; }
         if (_currentHealth <= 0) { return; }
 
         _rb2D.MovePosition(Vector2.MoveTowards(_rb2D.position, _player.position, _moveSpeed * Time.fixedDeltaTime));
