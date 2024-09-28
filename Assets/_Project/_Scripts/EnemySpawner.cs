@@ -8,7 +8,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] EnemyController _enemyPrefab;
     [SerializeField] float _spawnInterval;
     [SerializeField] int _enemyLimit = 10;
-    List<EnemyController> _spawnedEnemies = new();
+    Queue<EnemyController> _availableEnemies = new();
     private Camera _camera;
     private void Awake()
     {
@@ -16,8 +16,28 @@ public class EnemySpawner : MonoBehaviour
     }
     private void Start()
     {
+        InstantiateEnemies();
         InvokeRepeating(nameof(SpawnEnemy), 1f, _spawnInterval);
     }
+
+    private void InstantiateEnemies()
+    {
+        for (int i = 0; i < _enemyLimit; i++)
+        {
+            // Spawn enemies
+            var enemy = Instantiate(_enemyPrefab, transform);
+            enemy.Initialize(_player.transform, this);
+            enemy.gameObject.SetActive(false);
+            _availableEnemies.Enqueue(enemy);
+        }
+    }
+
+    public void ReturnEnemyToPool(EnemyController enemy)
+    {
+        _availableEnemies.Enqueue(enemy);
+        print($"{enemy.name} returned to queue");
+    }
+
     private void SpawnEnemy()
     {
         // Initial Random.Range determines Left/Right side
@@ -40,9 +60,14 @@ public class EnemySpawner : MonoBehaviour
             spawnY = 1 + Random.Range(0f, 1f);
         }
         var spawnPosition = _camera.ViewportToWorldPoint(new(spawnX, spawnY, 10f));
-        var enemy = Instantiate(_enemyPrefab, spawnPosition, Quaternion.identity);
-        enemy.transform.SetParent(transform);
-        enemy.Initialize(_player.transform);
-        _spawnedEnemies.Add(enemy);
+        if (_availableEnemies.Count <= 0)
+        {
+            // Debug.LogWarning($"No enemy returned from queue. Instantiating {_enemyLimit} enemies. Will be used on next call.");
+            // InstantiateEnemies();
+            return;
+        }
+        var enemy = _availableEnemies.Dequeue();
+        enemy.transform.position = spawnPosition;
+        enemy.gameObject.SetActive(true);
     }
 }

@@ -7,6 +7,7 @@ public class EnemyController : MonoBehaviour
 {
     [SerializeField] float _moveSpeed = 5f;
     [SerializeField] float _maxHealth = 5f;
+    EnemySpawner _spawner;
     Transform _player;
     float _currentHealth;
     SpriteRenderer _spriteRenderer;
@@ -16,13 +17,19 @@ public class EnemyController : MonoBehaviour
         _rb2D = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
-    public void Initialize(Transform player)
+    public void Initialize(Transform player, EnemySpawner spawner)
     {
         _player = player;
+        _spawner = spawner;
     }
     private void Start()
     {
         _currentHealth = _maxHealth;
+    }
+    private void OnDisable()
+    {
+        _currentHealth = _maxHealth;
+        _spriteRenderer.color = Color.white;
     }
     private void FixedUpdate()
     {
@@ -31,12 +38,21 @@ public class EnemyController : MonoBehaviour
 
         _rb2D.MovePosition(Vector2.MoveTowards(_rb2D.position, _player.position, _moveSpeed * Time.fixedDeltaTime));
     }
+    public void ResetToDefault()
+    {
+        _currentHealth = _maxHealth;
+        _spriteRenderer.color = Color.white;
+    }
     public void TakeDamage(float damageAmount)
     {
         _currentHealth -= damageAmount;
         if (_currentHealth <= 0f)
         {
-            _spriteRenderer.DOColor(Color.black, 1f).SetEase(Ease.InOutQuad).OnComplete(() => Destroy(gameObject));
+            _spriteRenderer.DOColor(Color.black, 1f).SetEase(Ease.InOutQuad).OnComplete(() =>
+            {
+                gameObject.SetActive(false);
+                _spawner.ReturnEnemyToPool(this);
+            });
         }
     }
 }
