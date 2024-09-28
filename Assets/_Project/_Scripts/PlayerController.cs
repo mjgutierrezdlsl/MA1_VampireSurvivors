@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     float _currentHealth = 0;
     Rigidbody2D _rb2D;
     SpriteRenderer _spriteRenderer;
+    public SpriteRenderer SpriteRenderer => _spriteRenderer;
     Vector2 _moveDirection;
 
     private void Awake()

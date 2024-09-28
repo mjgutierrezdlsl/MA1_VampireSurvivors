@@ -7,18 +7,20 @@ public class Cleaver : MonoBehaviour
     [SerializeField] Animator _animator;
     [SerializeField] float _attackInterval = 1f;
     [SerializeField] float _damageAmount;
+    [SerializeField] PlayerController _playerController;
     IEnumerator Start()
     {
         while (gameObject.activeSelf)
         {
             yield return new WaitForSeconds(_attackInterval);
-            _animator.SetTrigger("attack");
+            _animator.SetTrigger(_playerController.SpriteRenderer.flipX ? "attack_left" : "attack_right");
         }
     }
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.collider.TryGetComponent<EnemyController>(out var enemy))
+        if (other.TryGetComponent<EnemyController>(out var enemy))
         {
+            print($"Trigger: {enemy.name}");
             enemy.TakeDamage(_damageAmount);
         }
     }
