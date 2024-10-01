@@ -1,10 +1,13 @@
 using System;
 using UnityEngine;
 
-public class ExperienceManager : MonoBehaviour
+public class ExperienceManager : Singleton<ExperienceManager>
 {
     [SerializeField] private AnimationCurve _levelCurve;
-    public int _currentLevel;
+    private int _totalExperiencePoints;
+    private int _currentLevel;
+
+    public int MaxLevel => (int)_levelCurve.keys[_levelCurve.length - 1].time;
     public int CurrentLevel
     {
         get => _currentLevel;
@@ -14,38 +17,23 @@ public class ExperienceManager : MonoBehaviour
             OnCurrentLevelChanged?.Invoke(_currentLevel);
         }
     }
-    public int PrevPoints => (int)_levelCurve.Evaluate(CurrentLevel);
-    public int MaxLevel => (int)_levelCurve.keys[_levelCurve.length - 1].time;
-    public int NextPoints => (int)_levelCurve.Evaluate(CurrentLevel + 1);
-    public int MaxPoints => (int)_levelCurve.Evaluate(MaxLevel);
-    private int _totalExperiencePoints;
+
+    private int BasePoints => (int)_levelCurve.Evaluate(CurrentLevel);
+    private int NextPoints => (int)_levelCurve.Evaluate(CurrentLevel + 1);
     public int TotalExperiencePoints
     {
         get => _totalExperiencePoints;
         set
         {
             _totalExperiencePoints = (int)Mathf.Clamp(value, 0, _levelCurve.Evaluate(MaxLevel));
-            OnTotalExperiencePointsChanged?.Invoke(_totalExperiencePoints, NextPoints);
+            if (_totalExperiencePoints >= NextPoints)
+            {
+                CurrentLevel++;
+            }
+            OnTotalExperiencePointsChanged?.Invoke(_totalExperiencePoints, BasePoints, NextPoints);
         }
     }
-    public event Action<int> OnCurrentLevelChanged;
-    public event Action<int, int> OnTotalExperiencePointsChanged;
 
-    private float elapsed;
-    private void Update()
-    {
-        if (elapsed < 10f)
-        {
-            elapsed += Time.deltaTime;
-        }
-        else
-        {
-            elapsed = 10f;
-        }
-        if (TotalExperiencePoints >= NextPoints)
-        {
-            CurrentLevel++;
-        }
-        TotalExperiencePoints = (int)_levelCurve.Evaluate(elapsed);
-    }
+    public event Action<int> OnCurrentLevelChanged;
+    public event Action<int, int, int> OnTotalExperiencePointsChanged;
 }

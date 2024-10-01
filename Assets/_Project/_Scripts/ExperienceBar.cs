@@ -6,22 +6,19 @@ using UnityEngine.UI;
 
 public class ExperienceBar : MonoBehaviour
 {
-    [SerializeField] ExperienceManager _expManager;
     [SerializeField] Image _fillImage;
     private void OnEnable()
     {
-        _expManager.OnTotalExperiencePointsChanged += OnExpChanged;
+        ExperienceManager.Instance.OnTotalExperiencePointsChanged += OnExpChanged;
     }
     private void OnDisable()
     {
-        _expManager.OnTotalExperiencePointsChanged -= OnExpChanged;
+        ExperienceManager.Instance.OnTotalExperiencePointsChanged -= OnExpChanged;
     }
 
-    private void OnExpChanged(int total, int next)
+    private void OnExpChanged(int totalPoints, int basePoints, int nextPoints)
     {
-        // _fillImage.fillAmount = arg1 / (float)arg2;
-        var remaining = (float)Mathf.InverseLerp((float)_expManager.PrevPoints, (float)next, (float)total);
-        _fillImage.fillAmount = remaining;
-        print(remaining);
+        var fillAmount = (float)Mathf.InverseLerp(basePoints, nextPoints, totalPoints);
+        _fillImage.fillAmount = fillAmount;
     }
 }
