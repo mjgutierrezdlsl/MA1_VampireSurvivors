@@ -188,7 +188,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 3
+  m_Radius: 1
 --- !u!1 &350278596
 GameObject:
   m_ObjectHideFlags: 0
@@ -523,8 +523,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72e8def57dc17bb4b911adf92a85cf2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amount: 100
-  radius: 10
+  amount: 50
   prefab: {fileID: 5399028526686307244, guid: 08b969cb8af22d841b62be8a84dcfbc8, type: 3}
 --- !u!4 &580106946
 Transform:
@@ -12275,7 +12274,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1077725960
 Transform:
   m_ObjectHideFlags: 0
@@ -13116,7 +13115,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2073010116
 Transform:
   m_ObjectHideFlags: 0

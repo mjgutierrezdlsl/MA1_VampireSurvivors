@@ -52,6 +52,8 @@ public class EnemyController : MonoBehaviour
             {
                 gameObject.SetActive(false);
                 _spawner.ReturnEnemyToPool(this);
+                var coin = CoinSpawner.Instance.GetCoin();
+                coin.transform.position = transform.position;
             });
         }
     }
