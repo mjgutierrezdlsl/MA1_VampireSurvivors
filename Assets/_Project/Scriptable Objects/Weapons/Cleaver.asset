@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beac5659a870efb47bd783256f332d8b, type: 3}
   m_Name: Cleaver
   m_EditorClassIdentifier: 
+  <WeaponPrefab>k__BackingField: {fileID: 6031483293739509808, guid: 3da211ebc55086b4b931ca355e593304, type: 3}
+  <Sprite>k__BackingField: {fileID: 21300000, guid: 491fa29dd12af044999fe63bc204c020, type: 3}
+  <Description>k__BackingField: Swings an arc around the player, damaging enemies
+    caught in its path.
   <CoolDownTime>k__BackingField: 2
   <DamageAmount>k__BackingField: 1
-  <WeaponPrefab>k__BackingField: {fileID: 6031483293739509808, guid: 3da211ebc55086b4b931ca355e593304, type: 3}

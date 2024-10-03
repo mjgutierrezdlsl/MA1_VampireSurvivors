@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: FireBomb
   m_EditorClassIdentifier: 
   <WeaponPrefab>k__BackingField: {fileID: 3387277234898431700, guid: 31349e19c25b16348b2c61c588124c48, type: 3}
+  <Sprite>k__BackingField: {fileID: 21300000, guid: 002ae64d6fb362d4895ca2730ef0f712, type: 3}
+  <Description>k__BackingField: Throws a bomb which damages enemies caught in its
+    zone.
   <CoolDownTime>k__BackingField: 1
   <DamageAmount>k__BackingField: 1
   <Amount>k__BackingField: 1
