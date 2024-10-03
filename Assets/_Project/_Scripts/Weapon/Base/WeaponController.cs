@@ -4,12 +4,10 @@ using UnityEngine;
 
 public abstract class WeaponController : MonoBehaviour
 {
-    protected float _coolDownTime;
-    protected float _damageAmount;
-    public void Initialize(WeaponData data)
+    protected WeaponData Data;
+    public virtual void Initialize(WeaponData data)
     {
-        _coolDownTime = data.CoolDownTime;
-        _damageAmount = data.DamageAmount;
+        Data = data;
         StartCoroutine(EnableWeapon());
     }
     public abstract IEnumerator EnableWeapon();

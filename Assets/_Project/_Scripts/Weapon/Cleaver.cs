@@ -10,7 +10,7 @@ public class Cleaver : WeaponController
         if (other.TryGetComponent<EnemyController>(out var enemy))
         {
             print($"Trigger: {enemy.name}");
-            enemy.TakeDamage(_damageAmount);
+            enemy.TakeDamage(Data.DamageAmount);
         }
     }
 
@@ -18,7 +18,7 @@ public class Cleaver : WeaponController
     {
         while (gameObject.activeSelf)
         {
-            yield return new WaitForSeconds(_coolDownTime);
+            yield return new WaitForSeconds(Data.CoolDownTime);
             _animator.SetTrigger(PlayerController.Instance.SpriteRenderer.flipX ? "attack_left" : "attack_right");
         }
     }

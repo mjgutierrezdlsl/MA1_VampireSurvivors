@@ -46,6 +46,7 @@ public class EnemyController : MonoBehaviour
     public void TakeDamage(float damageAmount)
     {
         _currentHealth -= damageAmount;
+        print($"{name}: {_currentHealth}");
         if (_currentHealth <= 0f)
         {
             _spriteRenderer.DOColor(Color.black, 1f).SetEase(Ease.InOutQuad).OnComplete(() =>

@@ -12174,6 +12174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weapons:
+  - {fileID: 11400000, guid: ba31b773eb2eb8d4ea4350ebb6915998, type: 2}
   - {fileID: 11400000, guid: dab0a712301b3704580ef54684736ff2, type: 2}
 --- !u!1 &1124363914
 GameObject:

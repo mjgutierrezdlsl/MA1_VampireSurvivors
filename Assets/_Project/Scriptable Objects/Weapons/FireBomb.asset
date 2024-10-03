@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7715f97a8f19e204bba99d66f6ebbe8d, type: 3}
+  m_Name: FireBomb
+  m_EditorClassIdentifier: 
+  <WeaponPrefab>k__BackingField: {fileID: 3387277234898431700, guid: 31349e19c25b16348b2c61c588124c48, type: 3}
+  <CoolDownTime>k__BackingField: 1
+  <DamageAmount>k__BackingField: 1
+  <Amount>k__BackingField: 1
+  <SpawnSpeed>k__BackingField: 1
+  <SpawnRadius>k__BackingField: 2
+  <EffectRadius>k__BackingField: 1
+  <EffectDuration>k__BackingField: 3
