@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : Singleton<PlayerController>
 {
     [SerializeField] float _moveSpeed = 5f;
     [SerializeField] float _maxHealth = 100f;
@@ -14,8 +14,9 @@ public class PlayerController : MonoBehaviour
     public SpriteRenderer SpriteRenderer => _spriteRenderer;
     Vector2 _moveDirection;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         _rb2D = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
