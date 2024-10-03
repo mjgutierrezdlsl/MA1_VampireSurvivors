@@ -13,7 +13,11 @@ public class WeaponSelectionMenu : MonoBehaviour
         {
             var selection = Instantiate(_selectionPrefab, transform);
             selection.Initialize(weapon);
-            selection.GetComponent<Button>().onClick.AddListener(() => gameObject.SetActive(false));
+            selection.GetComponent<Button>().onClick.AddListener(() =>
+            {
+                gameObject.SetActive(false);
+                GameManager.Instance.ResumeGame();
+            });
             _selections.Add(selection);
         }
     }
