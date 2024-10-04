@@ -12,9 +12,13 @@ public class MapController : Singleton<MapController>
     Vector3 _noTerrainPosition;
     Vector3 PlayerMoveDirection;
     List<GameObject> _activeChunks = new();
+    GameObject latestChunk;
+    [SerializeField] float maxDistanceFromChunk;
+    float distanceFromChunk;
     private void Start()
     {
         SpawnChunk();
+        InvokeRepeating(nameof(ChunkOptimizer), 1f, 1f);
     }
     private void Update()
     {
@@ -39,9 +43,17 @@ public class MapController : Singleton<MapController>
 
     private void SpawnChunk()
     {
-        var chunk = Instantiate(_terrainChunk, _noTerrainPosition, Quaternion.identity);
-        chunk.transform.SetParent(transform);
-        _activeChunks.Add(chunk);
+        latestChunk = Instantiate(_terrainChunk, _noTerrainPosition, Quaternion.identity);
+        latestChunk.transform.SetParent(transform);
+        _activeChunks.Add(latestChunk);
+    }
+    private void ChunkOptimizer()
+    {
+        foreach (var chunk in _activeChunks)
+        {
+            distanceFromChunk = Vector3.Distance(PlayerController.Instance.transform.position, chunk.transform.position);
+            chunk.SetActive(distanceFromChunk < maxDistanceFromChunk);
+        }
     }
     private void OnDrawGizmos()
     {

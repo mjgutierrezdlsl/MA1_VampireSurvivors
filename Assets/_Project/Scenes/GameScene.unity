@@ -1601,6 +1601,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   CurrentChunk: {fileID: 0}
+  maxDistanceFromChunk: 50
 --- !u!4 &2143553099
 Transform:
   m_ObjectHideFlags: 0
