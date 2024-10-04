@@ -13,6 +13,7 @@ public class PlayerController : Singleton<PlayerController>
     SpriteRenderer _spriteRenderer;
     public SpriteRenderer SpriteRenderer => _spriteRenderer;
     Vector2 _moveDirection;
+    public Vector2 MoveDirection => _moveDirection;
 
     protected override void Awake()
     {
