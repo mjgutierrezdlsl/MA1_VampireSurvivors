@@ -7,6 +7,7 @@ public class EnemyController : MonoBehaviour
 {
     [SerializeField] float _moveSpeed = 5f;
     [SerializeField] float _maxHealth = 5f;
+    [SerializeField] float _deathDuration = 0.3f;
     EnemySpawner _spawner;
     Transform _player;
     float _currentHealth;
@@ -49,13 +50,23 @@ public class EnemyController : MonoBehaviour
         print($"{name}: {_currentHealth}");
         if (_currentHealth <= 0f)
         {
-            _spriteRenderer.DOColor(Color.black, 1f).SetEase(Ease.InOutQuad).OnComplete(() =>
-            {
-                gameObject.SetActive(false);
-                _spawner.ReturnEnemyToPool(this);
-                var coin = CoinSpawner.Instance.GetCoin();
-                coin.transform.position = transform.position;
-            });
+            StartCoroutine(DeathRoutine());
         }
+    }
+    IEnumerator DeathRoutine()
+    {
+        float time = 0;
+        while (time < _deathDuration)
+        {
+            _spriteRenderer.color = Color.Lerp(Color.white, Color.black, time / _deathDuration);
+            time += Time.deltaTime;
+            yield return null;
+        }
+        gameObject.SetActive(false);
+        ResetToDefault();
+        _spawner.ReturnEnemyToPool(this);
+        var coin = CoinSpawner.Instance.GetCoin();
+        coin.transform.position = transform.position;
+
     }
 }
