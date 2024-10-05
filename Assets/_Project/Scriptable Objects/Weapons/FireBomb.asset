@@ -18,7 +18,7 @@ MonoBehaviour:
     zone.
   <CoolDownTime>k__BackingField: 1
   <DamageAmount>k__BackingField: 1
-  <Amount>k__BackingField: 1
+  <Amount>k__BackingField: 3
   <SpawnSpeed>k__BackingField: 1
   <SpawnRadius>k__BackingField: 2
   <EffectRadius>k__BackingField: 1

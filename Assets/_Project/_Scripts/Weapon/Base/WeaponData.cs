@@ -11,9 +11,4 @@ public class WeaponData : ScriptableObject
     [field: SerializeField, TextArea] public string Description { get; private set; }
     [field: SerializeField] public float CoolDownTime { get; private set; }
     [field: SerializeField] public float DamageAmount { get; private set; }
-    public event Action<WeaponData> OnWeaponActivate;
-    public void ActivateWeapon()
-    {
-        OnWeaponActivate?.Invoke(this);
-    }
 }

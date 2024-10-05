@@ -14,22 +14,6 @@ public class WeaponManager : Singleton<WeaponManager>
         // Activates the default weapon for the player
         ActivateWeapon(_weapons[0]);
     }
-    private void OnEnable()
-    {
-        foreach (var weapon in _weapons)
-        {
-            weapon.OnWeaponActivate += ActivateWeapon;
-        }
-    }
-
-    private void OnDisable()
-    {
-        foreach (var weapon in _weapons)
-        {
-            weapon.OnWeaponActivate -= ActivateWeapon;
-        }
-    }
-
     public void ActivateWeapon(WeaponData weaponData)
     {
         var weapon = Instantiate(weaponData.WeaponPrefab, weaponParent);

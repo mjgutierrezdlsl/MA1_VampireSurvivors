@@ -456,8 +456,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponParent: {fileID: 1077725960}
   _weapons:
-  - {fileID: 11400000, guid: dab0a712301b3704580ef54684736ff2, type: 2}
+  - {fileID: 11400000, guid: 003c2aad3307440d9bfb3eb0727fb911, type: 2}
   - {fileID: 11400000, guid: ba31b773eb2eb8d4ea4350ebb6915998, type: 2}
+  - {fileID: 11400000, guid: dab0a712301b3704580ef54684736ff2, type: 2}
 --- !u!1 &922711863
 GameObject:
   m_ObjectHideFlags: 0
